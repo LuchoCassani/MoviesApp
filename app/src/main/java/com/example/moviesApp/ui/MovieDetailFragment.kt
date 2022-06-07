@@ -11,9 +11,13 @@ import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.example.moviesApp.R
 import com.example.moviesApp.data.Movie
+import com.example.moviesApp.databinding.MovieDetailBinding
 
 
 class MovieDetailFragment : Fragment() {
+
+
+
     private var movie: Movie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,18 +33,18 @@ class MovieDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.movie_detail, container, false)
+        val binding = MovieDetailBinding.inflate(inflater, container,false)
 
         movie?.let {
-            rootView.findViewById<TextView>(R.id.item_detail).text = it.overview
-            rootView.findViewById<TextView>(R.id.genre_textview).text = it.getGenerosString()
-            val poster = rootView.findViewById<ImageView>(R.id.poster_image)
+            binding.itemDetail.text = it.overview
+            binding.genreTextview.text = it.getGenresString()
+            val poster = binding.posterImage
             Glide
                 .with(this)
                 .load(it.urlImage).into(poster)
         }
 
-        return rootView
+        return binding.root
     }
 
     companion object {

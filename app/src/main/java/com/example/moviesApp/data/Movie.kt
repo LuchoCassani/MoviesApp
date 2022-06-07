@@ -18,7 +18,7 @@ data class Movie(
     var urlImage:String = ""
     var genres: List<String> = mutableListOf()
 
-    fun getGenerosString(): String {
+    fun getGenresString(): String {
         val stringBuilder = StringBuilder()
         for (genre in genres) {
             stringBuilder.append(genre)

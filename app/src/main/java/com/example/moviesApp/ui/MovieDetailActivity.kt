@@ -5,12 +5,17 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.MenuItem
 import com.example.moviesApp.R
+import com.example.moviesApp.databinding.ActivityMovieDetailBinding
+
 
 class MovieDetailActivity : AppCompatActivity() {
 
+  private lateinit var binding:ActivityMovieDetailBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_detail)
+        binding = ActivityMovieDetailBinding.inflate((layoutInflater))
+        setContentView(binding.root)
         setSupportActionBar(findViewById(R.id.detail_toolbar))
 
         if (savedInstanceState == null) {
