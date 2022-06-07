@@ -13,21 +13,25 @@ import com.example.moviesApp.R
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import com.example.moviesApp.data.Movie
+import com.example.moviesApp.databinding.ActivityMovieDetailBinding.inflate
+import com.example.moviesApp.databinding.ActivityMovieListBinding
 
 class MovieListActivity : AppCompatActivity() {
 
+    private lateinit var binding:ActivityMovieListBinding
     private val viewModel: MovieListViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_movie_list)
+        binding = ActivityMovieListBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val toolbar = findViewById<Toolbar>(R.id.toolbar)
+        val toolbar = binding.toolbar
         setSupportActionBar(toolbar)
         toolbar.title = title
 
         val moviesObserver = Observer<List<Movie>>{movies ->
-            setupRecyclerView(findViewById(R.id.item_list), movies)
+            setupRecyclerView (findViewById(R.id.item_list), movies)
         }
         viewModel.movies.observe(this, moviesObserver)
 
@@ -42,18 +46,14 @@ class MovieListActivity : AppCompatActivity() {
                                         private val values: List<Movie>) :
             RecyclerView.Adapter<SimpleFilmRecyclerViewAdapter.ViewHolder>() {
 
-        private val onClickListener: View.OnClickListener
+        private val onClickListener: View.OnClickListener = View.OnClickListener { v ->
+            val item = v.tag as Movie
 
-        init {
-            onClickListener = View.OnClickListener { v ->
-                val item = v.tag as Movie
-
-                val intent = Intent(v.context, MovieDetailActivity::class.java).apply {
-                    putExtra(MovieDetailFragment.ARG_ITEM, item)
-                }
-                v.context.startActivity(intent)
-
+            val intent = Intent(v.context, MovieDetailActivity::class.java).apply {
+                putExtra(MovieDetailFragment.ARG_ITEM, item)
             }
+            v.context.startActivity(intent)
+
         }
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
