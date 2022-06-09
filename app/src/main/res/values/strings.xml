@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">MoviesApp</string>
     <string name="title_item_detail">Item Detail</string>
+    <string name="votacion">Votacion</string>
+    <string name="fecha_de_estreno">Fecha de estreno:</string>
 </resources>

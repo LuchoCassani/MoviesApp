@@ -1,5 +1,6 @@
 package com.example.moviesApp.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.CollapsingToolbarLayout
@@ -31,6 +32,7 @@ class MovieDetailFragment : Fragment() {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val binding = MovieDetailBinding.inflate(inflater, container,false)
@@ -38,6 +40,7 @@ class MovieDetailFragment : Fragment() {
         movie?.let {
             binding.itemDetail.text = it.overview
             binding.genreTextview.text = it.getGenresString()
+            binding.releaseDate.text = it.releaseDate
             val poster = binding.posterImage
             Glide
                 .with(this)

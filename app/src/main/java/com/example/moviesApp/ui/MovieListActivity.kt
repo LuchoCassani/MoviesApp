@@ -1,5 +1,6 @@
 package com.example.moviesApp.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
@@ -62,9 +63,10 @@ class MovieListActivity : AppCompatActivity() {
             return ViewHolder(view)
         }
 
+        @SuppressLint("SetTextI18n")
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
             val movie = values[position]
-            holder.idView.text = movie.vote.toString()
+            holder.idView.text = "Puntuacion " + movie.vote.toString()
             holder.contentView.text = movie.title
 
             with(holder.itemView) {

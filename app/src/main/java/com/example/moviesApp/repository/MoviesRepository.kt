@@ -15,6 +15,7 @@ import com.example.moviesApp.database.MovieDao
 import com.example.moviesApp.database.MoviesDataBase
 import retrofit2.Call
 import retrofit2.Response
+import kotlin.concurrent.thread
 
 
 private const val BASE_URL = "https://api.themoviedb.org/3/"
@@ -54,16 +55,17 @@ object MoviesRepository {
             }
 
             override fun onFailure(call: Call<NowPlayingMovies>, t: Throwable) {
-
+                println("Error")
             }
 
         })
         return completeMoviesLiveData
-            // return movieDao?.allMovies() ?: MutableLiveData()
+            //return movieDao?.allMovies() ?: MutableLiveData<List<Movie>>()
+
     }
 
     private fun completeInfo(movies: List<Movie>) {
-        val call = moviesService.getGenreList(API_KEY,"en")
+        val call = moviesService.getGenreList(API_KEY,"es")
         call.enqueue(object: retrofit2.Callback<Genres>{
             override fun onResponse(call: Call<Genres>, response: Response<Genres>) {
                 if (response.isSuccessful){
@@ -76,6 +78,12 @@ object MoviesRepository {
 
                         }
                             completeMoviesLiveData.value = movies
+                        /*Thread{
+                            movieDao?.insertMovies(movies)
+                        }.start()*/
+
+
+
 
 
 
@@ -85,7 +93,7 @@ object MoviesRepository {
             }
 
             override fun onFailure(call: Call<Genres>, t: Throwable) {
-
+                println("Error")
             }
 
         }

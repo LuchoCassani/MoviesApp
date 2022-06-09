@@ -12,6 +12,7 @@ data class Movie(
     @SerializedName("poster_path") val posterPath: String?,
     @SerializedName("vote_average") val vote: Double,
     @SerializedName("genre_ids") val genreIds: List<Int>,
+    @SerializedName("release_date") val releaseDate: String,
     @SerializedName("overview") val overview: String):
 
     Serializable {
